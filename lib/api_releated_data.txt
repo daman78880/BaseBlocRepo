@@ -1,0 +1,1292 @@
+products
+
+
+GET
+/api/v1/products
+
+Parameters
+Try it out
+Name	Description
+limit *
+number
+(query)
+limit
+offset *
+number
+(query)
+offset
+Responses
+Code	Description	Links
+200	
+No links
+
+POST
+/api/v1/products
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "title": "string",
+  "price": 0,
+  "description": "string",
+  "categoryId": 0,
+  "images": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+201	
+No links
+
+GET
+/api/v1/products/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Responses
+Code	Description	Links
+200	
+No links
+
+PUT
+/api/v1/products/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "title": "string",
+  "price": 0,
+  "description": "string",
+  "categoryId": 0,
+  "images": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+No links
+
+DELETE
+/api/v1/products/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Responses
+Code	Description	Links
+200	
+No links
+
+GET
+/api/v1/products/{id}/related
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Responses
+Code	Description	Links
+200	
+No links
+
+GET
+/api/v1/products/slug/{slug}
+
+Parameters
+Try it out
+Name	Description
+slug *
+string
+(path)
+slug
+Responses
+Code	Description	Links
+200	
+No links
+
+GET
+/api/v1/products/slug/{slug}/related
+
+Parameters
+Try it out
+Name	Description
+slug *
+string
+(path)
+slug
+Responses
+Code	Description	Links
+200	
+No links
+users
+
+
+GET
+/api/v1/users
+
+Parameters
+Try it out
+Name	Description
+limit *
+number
+(query)
+limit
+Responses
+Code	Description	Links
+200	
+No links
+
+POST
+/api/v1/users
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "email": "string",
+  "name": "string",
+  "password": "string",
+  "role": "string",
+  "avatar": "string"
+}
+Responses
+Code	Description	Links
+201	
+No links
+
+GET
+/api/v1/users/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Responses
+Code	Description	Links
+200	
+No links
+
+PUT
+/api/v1/users/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "email": "string",
+  "name": "string",
+  "password": "string",
+  "role": "string",
+  "avatar": "string"
+}
+Responses
+Code	Description	Links
+200	
+No links
+
+DELETE
+/api/v1/users/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Responses
+Code	Description	Links
+200	
+No links
+
+POST
+/api/v1/users/is-available
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "email": "string"
+}
+Responses
+Code	Description	Links
+201	
+No links
+auth
+
+
+POST
+/api/v1/auth/login
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+201	
+No links
+
+GET
+/api/v1/auth/profile
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+No links
+
+POST
+/api/v1/auth/refresh-token
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "refreshToken": "string"
+}
+Responses
+Code	Description	Links
+201	
+No links
+categories
+
+
+GET
+/api/v1/categories
+
+Parameters
+Try it out
+Name	Description
+limit *
+number
+(query)
+limit
+Responses
+Code	Description	Links
+200	
+No links
+
+POST
+/api/v1/categories
+
+
+GET
+/api/v1/categories/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Responses
+Code	Description	Links
+200	
+No links
+
+PUT
+/api/v1/categories/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "image": "string"
+}
+Responses
+Code	Description	Links
+200	
+No links
+
+DELETE
+/api/v1/categories/{id}
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+Responses
+Code	Description	Links
+200	
+No links
+
+GET
+/api/v1/categories/slug/{slug}
+
+Parameters
+Try it out
+Name	Description
+slug *
+string
+(path)
+slug
+Responses
+Code	Description	Links
+200	
+No links
+
+GET
+/api/v1/categories/{id}/products
+
+Parameters
+Try it out
+Name	Description
+id *
+number
+(path)
+id
+limit *
+number
+(query)
+limit
+offset *
+number
+(query)
+offset
+Responses
+Code	Description	Links
+200	
+No links
+files
+
+
+POST
+/api/v1/files/upload
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+201	
+No links
+
+GET
+/api/v1/files/{filename}
+
+Parameters
+Try it out
+Name	Description
+filename *
+string
+(path)
+filename
+Responses
+Code	Description	Links
+200	
+No links
+Locations
+
+
+GET
+/api/v1/locations
+
+Parameters
+Try it out
+Name	Description
+radius *
+number
+(query)
+radius
+size *
+number
+(query)
+size
+origin *
+string
+(query)
+origin
+Responses
+Code	Description	Links
+200
+
+
+
+
+
+Products
+You can access the list of 50 products by using the /products endpoint.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products
+
+Response
+[
+  {
+    "id": 4,
+    "title": "Handmade Fresh Table",
+    "slug": "handmade-fresh-table",
+    "price": 687,
+    "description": "Andy shoes are designed to keeping in...",
+    "category": {
+      "id": 5,
+      "name": "Others",
+      "image": "https://placehold.co/600x400",
+      "slug": "others"
+    },
+    "images": [
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400"
+    ]
+  }
+  // ...
+]
+
+Get a single product by id
+You can get a single product by adding the id as a parameter: /products/<id>
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/4
+
+Response
+{
+  "id": 4,
+  "title": "Handmade Fresh Table",
+  "slug": "handmade-fresh-table",
+  "price": 687,
+  "description": "Andy shoes are designed to keeping in...",
+  "category": {
+    "id": 5,
+    "name": "Others",
+    "image": "https://placehold.co/600x400",
+    "slug": "others"
+  },
+  "images": [
+    "https://placehold.co/600x400",
+    "https://placehold.co/600x400",
+    "https://placehold.co/600x400"
+  ]
+}
+
+Get a single product by slug
+You can get a single product by its slug using the endpoint: /products/slug/<slug>
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/slug/handmade-fresh-table
+
+Response
+{
+  "id": 4,
+  "title": "Handmade Fresh Table",
+  "slug": "handmade-fresh-table",
+  "price": 687,
+  "description": "Andy shoes are designed to keeping in...",
+  "category": {
+    "id": 5,
+    "name": "Others",
+    "image": "https://placehold.co/600x400",
+    "slug": "others"
+  },
+  "images": [
+    "https://placehold.co/600x400",
+    "https://placehold.co/600x400",
+    "https://placehold.co/600x400"
+  ]
+}
+
+Create a product
+You can create a new product by sending an object like the following to /products/
+
+Request
+Terminal window
+[POST] https://api.escuelajs.co/api/v1/products/
+# Body
+{
+  "title": "New Product",
+  "price": 10,
+  "description": "A description",
+  "categoryId": 1,
+  "images": ["https://placehold.co/600x400"]
+}
+
+Response
+{
+  "title": "New Product",
+  "slug": "new-product",
+  "price": 10,
+  "description": "A description",
+  "images": ["https://placehold.co/600x400"],
+  "category": {
+    "id": 1,
+    "name": "Clothes",
+    "image": "https://placehold.co/600x400",
+    "slug": "clothes"
+  },
+  "id": 210,
+  "creationAt": "2023-01-03T16:51:33.000Z",
+  "updatedAt": "2023-01-03T16:51:33.000Z"
+}
+
+Note that the categoryId should be an ID that exists in /categories and the images are an array with URLs.
+
+Update a product
+You can update a product by sending an object like the following and adding the id as a parameter: /products/<id>
+
+Request
+Terminal window
+[PUT] https://api.escuelajs.co/api/v1/products/1
+# Body
+{
+  "title": "Change title",
+  "price": 100
+}
+
+Response
+{
+  "id": 1,
+  "title": "Change title",
+  "slug": "change-title",
+  "price": 100,
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "images": ["https://placehold.co/600x400"],
+  "category": {
+    "id": 4,
+    "name": "Shoes",
+    "image": "https://placehold.co/600x400",
+    "slug": "shoes"
+  }
+}
+
+Note that it is not necessary to send all product attributes, just send the ones you want to update.
+
+Delete a product
+You can delete a product by adding the id as a parameter: /products/<id>
+
+Request
+Terminal window
+[DELETE] https://api.escuelajs.co/api/v1/products/1
+
+Response
+true
+
+Pagination
+The API supports offset-based pagination for retrieving products in manageable chunks. Use the offset and limit query parameters to control which products are returned.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products?offset=0&limit=10
+
+Response
+[
+  {
+    "id": 1,
+    "title": "Handmade Fresh Table",
+    "slug": "handmade-fresh-table",
+    "price": 687,
+    "description": "Andy shoes are designed to keeping in...",
+    "category": {
+      "id": 5,
+      "name": "Others",
+      "slug": "others",
+      "image": "https://placehold.co/600x400"
+    },
+    "images": [
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400"
+    ]
+  }
+  // ... and 9 items more
+]
+
+How pagination works
+offset: The number of items to skip before starting to collect the result set
+limit: The maximum number of items to return
+To navigate through pages, increase the offset by the value of the limit:
+
+Request	Description
+/products?offset=0&limit=10	Return the first 10 products
+/products?offset=10&limit=10	Return products from 11 to 20
+/products?offset=20&limit=10	Return products from 21 to 30
+For a pagination with 20 items per page:
+
+Request	Description
+/products?offset=0&limit=20	Return the first 20 products
+/products?offset=20&limit=20	Return products from 21 to 40
+/products?offset=40&limit=20	Return products from 41 to 60
+Get products related by id
+You can access the list of related products by using the /products/<id>/related endpoint.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/1/related
+
+Response
+[
+  {
+    "id": 4,
+    "title": "Handmade Fresh Table",
+    "slug": "handmade-fresh-table",
+    "price": 687,
+    "description": "Andy shoes are designed to keeping in...",
+    "category": {
+      "id": 5,
+      "name": "Others",
+      "image": "https://placehold.co/600x400",
+      "slug": "others"
+    },
+    "images": [
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400"
+    ]
+  }
+  // ...
+]
+
+Get products related by slug
+You can get the list of related products by using the /products/slug/<slug>/related endpoint.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/slug/handmade-fresh-table/related
+
+Response
+[
+  {
+    "id": 4,
+    "title": "Handmade Fresh Table",
+    "slug": "handmade-fresh-table",
+    "price": 687,
+    "description": "Andy shoes are designed to keeping in...",
+    "category": {
+      "id": 5,
+      "name": "Others",
+      "image": "https://placehold.co/600x400",
+      "slug": "others"
+    },
+    "images": [
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400"
+    ]
+  }
+  // ...
+]
+
+Product Schema
+Attribute	Type	Description	Required for Create
+id	number	The unique identifier of the product	No (auto-generated)
+title	string	The name of the product	Yes
+price	number	Price of the product	Yes
+description	string	Description of the product	Yes
+categoryId	number	ID of the category (for create/update)	Yes
+category	object	Object containing category information	No (auto-populated)
+images	string[]	List of image URLs	Yes
+slug	string	URL-friendly version of the title	No (auto-generated)
+creationAt	string	Creation timestamp	No (auto-generated)
+updatedAt	string	Last update timestamp	No (auto-generated)
+
+
+
+Filter Products
+The API provides several ways to filter products using query parameters. All filter requests should be made to the base endpoint:
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products
+
+Filter by Title
+Filter products by their title using the title query parameter.
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?title=Generic
+
+Filter by Price
+Filter products by their exact price using the price query parameter.
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?price=100
+
+Filter by Price Range
+Filter products within a price range using the price_min and price_max query parameters.
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?price_min=900&price_max=1000
+
+Filter by Category
+Filter products by their category using the categoryId or categorySlug query parameter.
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?categoryId=1
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?categorySlug=clothes
+
+Combining Filters
+You can combine multiple filters by adding multiple query parameters to create more specific queries.
+
+Example 1: Title, Price Range, and Category
+Get all products with the title “Generic”, price between 900 and 1000, and category ID 1:
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?title=Generic&price_min=900&price_max=1000&categoryId=1
+
+Example 2: Price Range and Category with Pagination
+Get products with price between 900 and 1000, category ID 1, with pagination (10 products per page, starting from the 10th product):
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?price_min=900&price_max=1000&categoryId=1&limit=10&offset=10
+
+Example 3: Price Range with Pagination
+Get products with price between 100 and 1000, with pagination (10 products per page, starting from the 10th product):
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/products/?price_min=100&price_max=1000&limit=10&offset=10
+
+Response Format
+The API returns an array of product objects that match the specified filters. Each product includes details such as ID, title, price, description, category, and images.
+
+
+
+
+Categories
+Retrieve a list of all available categories.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/categories
+
+Response
+[
+  {
+    "id": 1,
+    "name": "Clothes",
+    "slug": "clothes",
+    "image": "https://placehold.co/600x400"
+  }
+  // Additional categories...
+]
+
+Get a single category by ID
+Retrieve detailed information about a specific category by its ID.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/categories/{id}
+
+Response
+{
+  "id": 1,
+  "name": "Clothes",
+  "slug": "clothes",
+  "image": "https://placehold.co/600x400"
+}
+
+Get a single category by slug
+Retrieve detailed information about a specific category by its slug.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/categories/slug/{slug}
+
+Response
+{
+  "id": 1,
+  "name": "Clothes",
+  "slug": "clothes",
+  "image": "https://placehold.co/600x400"
+}
+
+Response
+
+Create a category
+Create a new category by providing the required information.
+
+Request
+Terminal window
+[POST] https://api.escuelajs.co/api/v1/categories/
+
+#Body
+{
+  "name": "New Category",
+  "image": "https://placeimg.com/640/480/any"
+}
+
+Response
+{
+  "name": "New Category",
+  "slug": "new-category",
+  "image": "https://placeimg.com/640/480/any",
+  "id": 6
+}
+
+Note: The image field must be a valid URL to an image resource.
+
+Update a category
+Update an existing category’s information by its ID.
+
+Request
+Terminal window
+[PUT] https://api.escuelajs.co/api/v1/categories/{id}
+
+#Body
+{
+  "name": "Updated Category Name",
+  "image": "https://placeimg.com/640/480/any"
+}
+
+Response
+{
+  "id": 3,
+  "name": "Updated Category Name",
+  "slug": "updated-category-name",
+  "image": "https://placehold.co/600x400"
+}
+
+Delete a category
+Remove a category from the system by its ID.
+
+Request
+Terminal window
+[DELETE] https://api.escuelajs.co/api/v1/categories/{id}
+
+Response
+true
+
+Get all products by category
+Retrieve all products that belong to a specific category with pagination support.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/categories/{id}/products
+
+Response
+[
+  {
+    "id": 4,
+    "title": "Handmade Fresh Table",
+    "slug": "handmade-fresh-table",
+    "price": 687,
+    "description": "Andy shoes are designed to keeping in...",
+    "category": {
+      "id": 1,
+      "name": "Others",
+      "slug": "others",
+      "image": "https://placehold.co/600x400"
+    },
+    "images": [
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400",
+      "https://placehold.co/600x400"
+    ]
+  }
+  // Additional products...
+]
+
+Category Schema
+Attribute	Type	Description
+id	number	The unique identifier of the category
+name	string	Name of the category
+image	string	URL to the category’s image
+slug	string	URL-friendly version of the name
+
+
+
+
+
+Users
+Retrieve a list of all users by using the /users endpoint.
+
+Request
+Terminal window
+GET https://api.escuelajs.co/api/v1/users
+
+Response
+[
+  {
+    "id": 1,
+    "email": "john@mail.com",
+    "password": "changeme",
+    "name": "Jhon",
+    "role": "customer",
+    "avatar": "https://i.imgur.com/LDOO4Qs.jpg"
+  }
+  // ... additional users
+]
+
+Get a Single User
+Retrieve a specific user by providing the user’s id as a path parameter: /users/{id}
+
+Request
+Terminal window
+GET https://api.escuelajs.co/api/v1/users/1
+
+Response
+{
+  "id": 1,
+  "email": "john@mail.com",
+  "password": "changeme",
+  "name": "Jhon",
+  "role": "customer",
+  "avatar": "https://i.imgur.com/LDOO4Qs.jpg"
+}
+
+Create a User
+Create a new user by sending a POST request with the required user data to the /users/ endpoint.
+
+Request
+Terminal window
+POST https://api.escuelajs.co/api/v1/users/
+
+# Request Body
+{
+  "name": "Nicolas",
+  "email": "nico@gmail.com",
+  "password": "1234",
+  "avatar": "https://picsum.photos/800"
+}
+
+Response
+{
+  "email": "nico@gmail.com",
+  "password": "1234",
+  "name": "Nicolas",
+  "avatar": "https://i.imgur.com/yhW6Yw1.jpg",
+  "role": "customer",
+  "id": 24
+}
+
+Note: For demonstration purposes, passwords are stored as plain text. In a production environment, always implement proper password encryption.
+
+Update a User
+Update an existing user by sending a PUT request with the updated data and specifying the user’s id as a path parameter: /users/{id}
+
+Request
+Terminal window
+PUT https://api.escuelajs.co/api/v1/users/1
+
+# Request Body
+{
+  "email": "john@mail.com",
+  "name": "Change name"
+}
+
+Response
+{
+  "id": 4,
+  "email": "john@mail.com",
+  "password": "1234",
+  "name": "Change name",
+  "role": "admin",
+  "avatar": "https://i.imgur.com/yhW6Yw1.jpg"
+}
+
+Note: You only need to include the attributes you want to update in the request body. Other attributes will remain unchanged.
+
+Check Email Availability
+Verify if an email address is already registered in the system.
+
+Request
+Terminal window
+POST https://api.escuelajs.co/api/v1/users/is-available
+
+# Request Body
+{
+  "email": "john@mail.com"
+}
+
+Response
+{
+  "isAvailable": false
+}
+
+This endpoint is particularly useful for implementing real-time email validation in registration forms, allowing you to show immediate feedback to users about email availability.
+
+Email Validation Example
+
+User Schema
+Attribute	Type	Description
+id	number	Unique identifier for the user
+name	string	User’s full name
+role	string	User’s role (either “customer” or “admin”)
+email	string	User’s email address
+password	string	User’s password
+avatar	string	URL to the user’s profile image
+
+
+
+
+Authentication with JWT
+This API uses JSON Web Tokens (JWT) for secure authentication. The authentication flow consists of three main operations:
+
+Obtaining access and refresh tokens via login
+Accessing protected resources using the access token
+Refreshing expired access tokens using the refresh token
+Login
+To authenticate a user and obtain JWT tokens, send a POST request with email and password credentials.
+
+Request
+Terminal window
+POST https://api.escuelajs.co/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@mail.com",
+  "password": "changeme"
+}
+
+Response
+Upon successful authentication, the server returns both access and refresh tokens:
+
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY3Mjc2NjAyOCwiZXhwIjoxNjc0NDk0MDI4fQ.kCak9sLJr74frSRVQp0_27BY4iBCgQSmoT3vQVWKzJg",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY3Mjc2NjAyOCwiZXhwIjoxNjcyODAyMDI4fQ.P1_rB3hJ5afwiG4TWXLq6jOAcVJkvQZ2Z-ZZOnQ1dZw"
+}
+
+Note: The access token is valid for 20 days, and the refresh token is valid for 10 hours.
+
+Retrieving User Profile
+To access the authenticated user’s profile, include the access token in the Authorization header using the Bearer scheme.
+
+Request
+Terminal window
+GET https://api.escuelajs.co/api/v1/auth/profile
+Authorization: Bearer {your_access_token}
+
+Response
+{
+  "id": 1,
+  "email": "john@mail.com",
+  "password": "changeme",
+  "name": "Jhon",
+  "role": "customer",
+  "avatar": "https://api.lorem.space/image/face?w=640&h=480&r=867"
+}
+
+Refreshing Access Token
+When an access token expires, you can obtain a new pair of tokens by using the refresh token.
+
+Request
+Terminal window
+POST https://api.escuelajs.co/api/v1/auth/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "{your_refresh_token}"
+}
+
+Response
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY3Mjc2NjAyOCwiZXhwIjoxNjc0NDk0MDI4fQ.kCak9sLJr74frSRVQp0_27BY4iBCgQSmoT3vQVWKzJg",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY3Mjc2NjAyOCwiZXhwIjoxNjcyODAyMDI4fQ.P1_rB3hJ5afwiG4TWXLq6jOAcVJkvQZ2Z-ZZOnQ1dZw"
+}
+
+Note: The access token is valid for 20 days, and the refresh token is valid for 10 hours.
+
+Error Handling
+Common authentication errors include:
+
+401 Unauthorized: Invalid credentials or expired tokens
+403 Forbidden: Valid authentication but insufficient permissions
+400 Bad Request: Malformed request body or headers
+Always ensure your application properly handles token expiration by implementing automatic token refresh when needed.
+
+
+
+Locations
+The Locations API provides access to geographical location data. Use these endpoints to retrieve location information with various filtering options.
+
+Get all locations
+Retrieve a list of 10 locations randomly.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/locations
+
+Response
+[
+  {
+    "id": 3456024234637667,
+    "name": "2063 Bath Street",
+    "description": "Urbanus illum aspernatur.",
+    "latitude": 4.647499671477389,
+    "longitude": -74.27320830941972
+  }
+  // Additional locations...
+]
+
+Get locations by origin
+Retrieve locations sorted by distance from a specified origin point.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/locations?origin=6.2071641,-75.5720321
+
+Response
+[
+  {
+    "id": 3456024234637667,
+    "name": "2063 Bath Street",
+    "description": "Urbanus illum aspernatur.",
+    "latitude": 4.647499671477389,
+    "longitude": -74.27320830941972
+  }
+  // Additional locations...
+]
+
+Get locations with a limit
+Retrieve a specific number of locations.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/locations?size=10
+
+Response
+[
+  {
+    "id": 3456024234637667,
+    "name": "2063 Bath Street",
+    "description": "Urbanus illum aspernatur.",
+    "latitude": 4.647499671477389,
+    "longitude": -74.27320830941972
+  }
+  // Additional locations...
+]
+
+Get locations within a radius
+Retrieve locations within a specified radius (in kilometers) from an origin point.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/locations?origin=6.2071641,-75.5720321&radius=10
+
+Response
+[
+  {
+    "id": 3456024234637667,
+    "name": "2063 Bath Street",
+    "description": "Urbanus illum aspernatur.",
+    "latitude": 4.647499671477389,
+    "longitude": -74.27320830941972
+  }
+  // Additional locations...
+]
+
+Inspiration
+This endpoint allows you to retrieve store locations for an e-commerce platform and display them on a map, enabling you to create interfaces similar to “Starbucks stores near you” that help users find nearby physical locations.
+
+
+
+Upload File
+This endpoint allows you to upload files to the server. The uploaded files can later be referenced in other resources such as product images.
+
+Request
+To upload a file, send a POST request to the /files/upload endpoint. The request must use the multipart/form-data content type in the header.
+
+Terminal window
+[POST] https://api.escuelajs.co/api/v1/files/upload
+Content-Type: multipart/form-data
+#Body
+{
+  "file": "<Binary File>"
+}
+
+Response
+A successful upload will return a JSON object containing information about the uploaded file:
+
+{
+  "originalname": "Djhv7NO - Imgur.png",
+  "filename": "f3a5.png",
+  "location": "https://api.escuelajs.co/api/v1/files/f3a5.png"
+}
+
+Get a File
+You can retrieve a file by using its filename as a parameter in the URL path.
+
+Request
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/files/{fileName}
+
+Where {fileName} is the name of the file you want to retrieve (the filename value returned from the upload endpoint).
+
+Example:
+
+Terminal window
+[GET] https://api.escuelajs.co/api/v1/files/f3a5.png
+
+Response
+The response will be the requested file with the appropriate content type.
