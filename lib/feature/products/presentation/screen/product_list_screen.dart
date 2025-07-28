@@ -4,9 +4,11 @@ import 'package:bloc_demo_project/feature/products/domain/entities/produsts.dart
     show ProductListLocal;
 import 'package:bloc_demo_project/feature/products/presentation/bloc/products_bloc.dart'
     show ProductsBloc;
+import 'package:bloc_demo_project/feature/products/presentation/bloc/products_event.dart'
+    show ProductsEvent;
 import 'package:bloc_demo_project/feature/products/presentation/bloc/products_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer;
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer, ReadContext;
 import 'package:loader_overlay/loader_overlay.dart';
 
 class ProductListScreen extends StatelessWidget {
@@ -106,13 +108,28 @@ class ProductListScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        color: colorScheme.outline,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: colorScheme.outline,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              context.read<ProductsBloc>().add(
+                                ProductsEvent.selectProduct(index: index),
+                              );
+                            },
+                            icon: Icon(
+                              product.isSelected == true
+                                  ? Icons.check_box
+                                  : Icons.check_box_outline_blank,
+                              color: colorScheme.primary,
+                            ),
+                          ),
+                        ],
                       ),
-                      onTap: () {
-                        // Navigate to detail (to be implemented)
-                      },
                     ),
                   );
                 },

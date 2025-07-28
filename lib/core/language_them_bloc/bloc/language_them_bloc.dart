@@ -43,5 +43,29 @@ mixin MapLocaleList {
 }
 
 class LanguageThemBloc extends Bloc<LanguageThemEvent, LanguageThemState> {
-  LanguageThemBloc() : super(LanguageThemState());
+  LanguageThemBloc() : super(const LanguageThemState()) {
+    on<LanguageThemEvent>((event, emit) async {
+      await event.when(
+        initial: (languageType, isThemChange) async {
+          emit(
+            state.copyWith(
+              languageCode: languageType,
+              themeEvent: isThemChange,
+            ),
+          );
+        },
+        onChangeLanguage: (languageType) async {
+          emit(state.copyWith(languageCode: languageType));
+        },
+        isLoggedInStatusChanged: (isLoggedIn) async {
+          emit(state.copyWith(isLoggedIn: isLoggedIn));
+        },
+        isThemStatusChanged: (isThemChange) async {
+          final themeEvent =
+              isThemChange ? ThemeEvent.toggleLight : ThemeEvent.toggleDark;
+          emit(state.copyWith(themeEvent: themeEvent));
+        },
+      );
+    });
+  }
 }

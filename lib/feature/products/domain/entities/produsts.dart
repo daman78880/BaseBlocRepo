@@ -9,6 +9,7 @@ class ProductListLocal {
         required this.images,
         required this.creationAt,
         required this.updatedAt,
+        this.isSelected = false,
     });
 
     final int? id;
@@ -20,6 +21,7 @@ class ProductListLocal {
     final List<String> images;
     final DateTime? creationAt;
     final DateTime? updatedAt;
+    bool? isSelected;
 
     factory ProductListLocal.fromJson(Map<String, dynamic> json){ 
         return ProductListLocal(

@@ -8,8 +8,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required LoginUser loginUseCase})
     : _loginUseCase = loginUseCase,
       super(LoginInitial()) {
-    // on<SubmitLoginEvent>(_onLoginSubmitted);
-
     on<SubmitLoginEvent>((event, emit) async {
       await _onLoginSubmitted(event, emit);
     });
@@ -19,28 +17,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     SubmitLoginEvent event,
     Emitter<LoginState> emit,
   ) async {
-    emit(LoginLoading());
-    // await Future.delayed(const Duration(seconds: 2));
-    final result = await _loginUseCase.call(
-      email: event.email,
-      password: event.password,
-    );
-    result.match(
-      (failure) => emit(LoginFailure(failure.message)),
-      (user) => emit(LoginSuccess(user)),
-    );
+    if (!emit.isDone) {
+      emit(LoginLoading());
+    }
+
+    try {
+      final result = await _loginUseCase.call(
+        email: event.email,
+        password: event.password,
+      );
+
+      // Check if the bloc is still active before emitting
+      if (!emit.isDone) {
+        result.match(
+          (failure) => emit(LoginFailure(failure.message)),
+          (user) => emit(LoginSuccess(user)),
+        );
+      }
+    } catch (e) {
+      // Check if the bloc is still active before emitting error
+      if (!emit.isDone) {
+        emit(LoginFailure(e.toString()));
+      }
+    }
   }
 }
-
-
-// final result = await loginUseCase(email, password);
-// result.match(
-//   (failure) => emit(LoginError(failure.message)),
-//   (user) => emit(LoginSuccess(user)),
-// );
-// try {
-//   final user = await repository.login(email, password);
-//   emit(LoginSuccess(user));
-// } catch (e) {
-//   emit(LoginError(e.toString()));
-// }

@@ -55,12 +55,13 @@ extension ProductsEventPatterns on ProductsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ProductsInitial value)?  initial,TResult Function( ProductsGetList value)?  getList,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ProductsInitial value)?  initial,TResult Function( ProductsGetList value)?  getList,TResult Function( ProductToggleSelection value)?  selectProduct,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial(_that);case ProductsGetList() when getList != null:
-return getList(_that);case _:
+return getList(_that);case ProductToggleSelection() when selectProduct != null:
+return selectProduct(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return getList(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ProductsInitial value)  initial,required TResult Function( ProductsGetList value)  getList,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ProductsInitial value)  initial,required TResult Function( ProductsGetList value)  getList,required TResult Function( ProductToggleSelection value)  selectProduct,}){
 final _that = this;
 switch (_that) {
 case ProductsInitial():
 return initial(_that);case ProductsGetList():
-return getList(_that);}
+return getList(_that);case ProductToggleSelection():
+return selectProduct(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -97,12 +99,13 @@ return getList(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ProductsInitial value)?  initial,TResult? Function( ProductsGetList value)?  getList,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ProductsInitial value)?  initial,TResult? Function( ProductsGetList value)?  getList,TResult? Function( ProductToggleSelection value)?  selectProduct,}){
 final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial(_that);case ProductsGetList() when getList != null:
-return getList(_that);case _:
+return getList(_that);case ProductToggleSelection() when selectProduct != null:
+return selectProduct(_that);case _:
   return null;
 
 }
@@ -119,11 +122,12 @@ return getList(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( ListGetType listGetState)?  getList,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( ListGetType listGetState)?  getList,TResult Function( int index)?  selectProduct,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial();case ProductsGetList() when getList != null:
-return getList(_that.listGetState);case _:
+return getList(_that.listGetState);case ProductToggleSelection() when selectProduct != null:
+return selectProduct(_that.index);case _:
   return orElse();
 
 }
@@ -141,11 +145,12 @@ return getList(_that.listGetState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( ListGetType listGetState)  getList,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( ListGetType listGetState)  getList,required TResult Function( int index)  selectProduct,}) {final _that = this;
 switch (_that) {
 case ProductsInitial():
 return initial();case ProductsGetList():
-return getList(_that.listGetState);}
+return getList(_that.listGetState);case ProductToggleSelection():
+return selectProduct(_that.index);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +164,12 @@ return getList(_that.listGetState);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( ListGetType listGetState)?  getList,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( ListGetType listGetState)?  getList,TResult? Function( int index)?  selectProduct,}) {final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial();case ProductsGetList() when getList != null:
-return getList(_that.listGetState);case _:
+return getList(_that.listGetState);case ProductToggleSelection() when selectProduct != null:
+return selectProduct(_that.index);case _:
   return null;
 
 }
@@ -263,6 +269,72 @@ class _$ProductsGetListCopyWithImpl<$Res>
   return _then(ProductsGetList(
 listGetState: null == listGetState ? _self.listGetState : listGetState // ignore: cast_nullable_to_non_nullable
 as ListGetType,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ProductToggleSelection implements ProductsEvent {
+  const ProductToggleSelection({required this.index});
+  
+
+ final  int index;
+
+/// Create a copy of ProductsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProductToggleSelectionCopyWith<ProductToggleSelection> get copyWith => _$ProductToggleSelectionCopyWithImpl<ProductToggleSelection>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductToggleSelection&&(identical(other.index, index) || other.index == index));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,index);
+
+@override
+String toString() {
+  return 'ProductsEvent.selectProduct(index: $index)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ProductToggleSelectionCopyWith<$Res> implements $ProductsEventCopyWith<$Res> {
+  factory $ProductToggleSelectionCopyWith(ProductToggleSelection value, $Res Function(ProductToggleSelection) _then) = _$ProductToggleSelectionCopyWithImpl;
+@useResult
+$Res call({
+ int index
+});
+
+
+
+
+}
+/// @nodoc
+class _$ProductToggleSelectionCopyWithImpl<$Res>
+    implements $ProductToggleSelectionCopyWith<$Res> {
+  _$ProductToggleSelectionCopyWithImpl(this._self, this._then);
+
+  final ProductToggleSelection _self;
+  final $Res Function(ProductToggleSelection) _then;
+
+/// Create a copy of ProductsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? index = null,}) {
+  return _then(ProductToggleSelection(
+index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
