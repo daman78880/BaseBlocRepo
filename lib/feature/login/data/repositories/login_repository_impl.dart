@@ -1,6 +1,5 @@
 import 'package:bloc_demo_project/core/network/api_result.dart';
-import 'package:bloc_demo_project/feature/login/data/models/login_response_model.dart'
-    show LoginResponseModel;
+import 'package:bloc_demo_project/feature/login/domain/entities/user.dart';
 import 'package:bloc_demo_project/feature/login/domain/repositories/login_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import '../datasources/login_remote_datasource.dart';
@@ -12,14 +11,19 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, LoginResponseModel>> login({
+  Future<Either<Failure, User>> login({
     required String email,
     required String password,
   }) async {
     try {
       final request = LoginRequestModel(email: email, password: password);
       final userModel = await remoteDataSource.login(request);
-      return Right(userModel); // since UserModel extends User
+      return Right(
+        User(
+          accessToken: userModel.accessToken ?? '',
+          refreshToken: userModel.refreshToken ?? '',
+        ),
+      ); // since UserModel extends User
     } catch (e) {
       if (e is Failure) {
         return Left(e);

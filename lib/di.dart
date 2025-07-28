@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bloc_demo_project/core/network/connection_checker.dart';
 import 'package:bloc_demo_project/feature/login/data/datasources/login_remote_datasource.dart';
 import 'package:bloc_demo_project/feature/login/data/datasources/login_remote_datasource_impl.dart';
@@ -7,6 +6,11 @@ import 'package:bloc_demo_project/feature/login/data/repositories/login_reposito
 import 'package:bloc_demo_project/feature/login/domain/repositories/login_repository.dart';
 import 'package:bloc_demo_project/feature/login/domain/usecases/login_user.dart';
 import 'package:bloc_demo_project/feature/login/presentation/bloc/login_bloc.dart';
+import 'package:bloc_demo_project/feature/products/domain/repositories/product_repository.dart' show ProductsRepository;
+import 'package:bloc_demo_project/feature/products/domain/use_cases/product_use_cases.dart'
+    show ProductsUseCase;
+import 'package:bloc_demo_project/feature/products/presentation/bloc/products_bloc.dart'
+    show ProductsBloc;
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -23,6 +27,7 @@ Future<void> initDependencies() async {
   _registerLocalization();
   _registerNetworking();
   _initAuth();
+  _initProducts();
 }
 
 // Localization
@@ -81,5 +86,23 @@ void _initAuth() {
   // Bloc
   getIt.registerLazySingleton(
     () => LoginBloc(loginUseCase: getIt<LoginUser>()),
+  );
+}
+
+void _initProducts() {
+
+    // repository
+  getIt.registerLazySingleton<ProductsRepository>(
+    () => ProductsRepositoryImpl(getIt<ProductsRemoteDataSource>()),
+  );
+
+  // use cases
+  getIt.registerFactory<ProductsUseCase>(
+    () => ProductsUseCase(getIt<ProductsRepository>()),
+  );
+
+  // Bloc
+  getIt.registerLazySingleton(
+    () => ProductsBloc(productsUseCase: getIt<ProductsUseCase>()),
   );
 }

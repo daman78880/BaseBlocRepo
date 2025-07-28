@@ -20,6 +20,7 @@ class ApiHelper {
     required RequestType method,
     dynamic body,
     Map<String, dynamic>? queryParams,
+    String? pathParams,
     T Function(dynamic data)? decoder,
     Map<String, String>? headers,
   }) async {
@@ -33,25 +34,29 @@ class ApiHelper {
         headers: {...ApiConfig.headers, if (headers != null) ...headers},
       );
       Response response;
+      String url = endPoint;
+      if (pathParams != null) {
+        url = '$endPoint/$pathParams';
+      }
       switch (method) {
         case RequestType.get:
           response = await dio.get(
-            endPoint,
+            url,
             queryParameters: queryParams,
             options: options,
           );
           break;
         case RequestType.post:
-          response = await dio.post(endPoint, data: body, options: options);
+          response = await dio.post(url, data: body, options: options);
           break;
         case RequestType.put:
-          response = await dio.put(endPoint, data: body, options: options);
+          response = await dio.put(url, data: body, options: options);
           break;
         case RequestType.patch:
-          response = await dio.patch(endPoint, data: body, options: options);
+          response = await dio.patch(url, data: body, options: options);
           break;
         case RequestType.delete:
-          response = await dio.delete(endPoint, data: body, options: options);
+          response = await dio.delete(url, data: body, options: options);
           break;
       }
 

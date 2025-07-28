@@ -1,50 +1,16 @@
-import 'package:bloc_demo_project/feature/login/data/models/login_response_model.dart'
-    show LoginResponseModel;
+import 'package:bloc_demo_project/feature/login/domain/entities/user.dart'
+    show User;
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatelessWidget {
-  final LoginResponseModel loginResponseModel;
-  const ProductListScreen({super.key, required this.loginResponseModel});
+  final User user;
+  const ProductListScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
-
-    // Sample/mock data
-    final products = [
-      {
-        'id': 4,
-        'title': 'Handmade Fresh Table',
-        'price': 687,
-        'description': 'Andy shoes are designed to keeping in...',
-        'category': {
-          'id': 5,
-          'name': 'Others',
-          'image': 'https://placehold.co/600x400',
-          'slug': 'others',
-        },
-        'images': [
-          'https://placehold.co/600x400',
-          'https://placehold.co/600x400',
-        ],
-      },
-      {
-        'id': 5,
-        'title': 'Modern Lamp',
-        'price': 120,
-        'description': 'A beautiful modern lamp.',
-        'category': {
-          'id': 2,
-          'name': 'Home',
-          'image': 'https://placehold.co/600x400',
-          'slug': 'home',
-        },
-        'images': ['https://placehold.co/600x400'],
-      },
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

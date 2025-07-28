@@ -1,6 +1,7 @@
 import 'package:bloc_demo_project/di.dart' show getIt;
 import 'package:bloc_demo_project/feature/login/data/models/login_response_model.dart'
     show LoginResponseModel;
+import 'package:bloc_demo_project/feature/login/domain/entities/user.dart';
 import 'package:bloc_demo_project/feature/login/presentation/bloc/login_bloc.dart';
 import 'package:bloc_demo_project/feature/login/presentation/screen/login_screenn.dart';
 import 'package:flutter/material.dart';
@@ -50,9 +51,9 @@ class AppRouter {
         path: RoutePaths.productList,
         name: RouteNames.productList,
         builder: (context, state) {
-          if (state.extra != null && state.extra is LoginResponseModel) {
-            final loginResponseModel = state.extra as LoginResponseModel;
-            return ProductListScreen(loginResponseModel: loginResponseModel);
+          if (state.extra != null && state.extra is User) {
+            final user = state.extra as User;
+            return ProductListScreen(user: user);
           }
           return _errorBuilder(context, state);
         },

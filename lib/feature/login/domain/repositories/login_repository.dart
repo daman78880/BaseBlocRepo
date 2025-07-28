@@ -1,10 +1,10 @@
-import 'package:bloc_demo_project/feature/login/data/models/login_response_model.dart'
-    show LoginResponseModel;
+import 'package:bloc_demo_project/feature/login/domain/entities/user.dart'
+    show User;
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/network/api_result.dart';
 
 abstract class LoginRepository {
-  Future<Either<Failure, LoginResponseModel>> login({
+  Future<Either<Failure, User>> login({
     required String email,
     required String password,
   });

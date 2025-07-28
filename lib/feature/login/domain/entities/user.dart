@@ -1,13 +1,9 @@
 class User {
-  final int id;
-  final String name;
-  final String email;
-  final String token;
+  final String accessToken;
+  final String refreshToken;
 
   User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.token,
+    required this.accessToken,
+    required this.refreshToken,
   });
 }

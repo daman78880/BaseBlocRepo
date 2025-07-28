@@ -105,10 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
             }
             if (state is LoginSuccess) {
               // context.goNamed(RouteNames.productList);
-              context.pushNamed(
-                RouteNames.productList,
-                extra: state.loginResponseModel,
-              );
+              context.pushNamed(RouteNames.productList, extra: state.user);
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text("Login Success")));

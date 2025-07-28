@@ -1,5 +1,5 @@
-import 'package:bloc_demo_project/feature/login/data/models/login_response_model.dart'
-    show LoginResponseModel;
+import 'package:bloc_demo_project/feature/login/domain/entities/user.dart'
+    show User;
 import 'package:equatable/equatable.dart';
 
 abstract class LoginState extends Equatable {
@@ -14,11 +14,11 @@ class LoginInitial extends LoginState {}
 class LoginLoading extends LoginState {}
 
 class LoginSuccess extends LoginState {
-  final LoginResponseModel loginResponseModel;
-  const LoginSuccess(this.loginResponseModel);
+  final User user;
+  const LoginSuccess(this.user);
 
   @override
-  List<Object?> get props => [loginResponseModel];
+  List<Object?> get props => [user];
 }
 
 class LoginFailure extends LoginState {
