@@ -6,7 +6,14 @@ import 'package:bloc_demo_project/feature/login/data/repositories/login_reposito
 import 'package:bloc_demo_project/feature/login/domain/repositories/login_repository.dart';
 import 'package:bloc_demo_project/feature/login/domain/usecases/login_user.dart';
 import 'package:bloc_demo_project/feature/login/presentation/bloc/login_bloc.dart';
-import 'package:bloc_demo_project/feature/products/domain/repositories/product_repository.dart' show ProductsRepository;
+import 'package:bloc_demo_project/feature/products/data/data_sources/product_remote_data_source.dart'
+    show ProductsRemoteDataSource;
+import 'package:bloc_demo_project/feature/products/data/data_sources/product_remote_data_source_imp.dart'
+    show ProductsRemoteDataSourceImp;
+import 'package:bloc_demo_project/feature/products/data/repositories_imp/product_repository_impl.dart'
+    show ProductsRepositoryImpl;
+import 'package:bloc_demo_project/feature/products/domain/repositories/product_repository.dart'
+    show ProductsRepository;
 import 'package:bloc_demo_project/feature/products/domain/use_cases/product_use_cases.dart'
     show ProductsUseCase;
 import 'package:bloc_demo_project/feature/products/presentation/bloc/products_bloc.dart'
@@ -90,8 +97,12 @@ void _initAuth() {
 }
 
 void _initProducts() {
+  // datasource
+  getIt.registerLazySingleton<ProductsRemoteDataSource>(
+    () => ProductsRemoteDataSourceImp(getIt<ApiHelper>()),
+  );
 
-    // repository
+  // repository
   getIt.registerLazySingleton<ProductsRepository>(
     () => ProductsRepositoryImpl(getIt<ProductsRemoteDataSource>()),
   );

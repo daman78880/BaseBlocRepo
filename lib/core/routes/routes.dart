@@ -4,6 +4,8 @@ import 'package:bloc_demo_project/feature/login/data/models/login_response_model
 import 'package:bloc_demo_project/feature/login/domain/entities/user.dart';
 import 'package:bloc_demo_project/feature/login/presentation/bloc/login_bloc.dart';
 import 'package:bloc_demo_project/feature/login/presentation/screen/login_screenn.dart';
+import 'package:bloc_demo_project/feature/products/presentation/bloc/products_bloc.dart'
+    show ProductsBloc;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +55,10 @@ class AppRouter {
         builder: (context, state) {
           if (state.extra != null && state.extra is User) {
             final user = state.extra as User;
-            return ProductListScreen(user: user);
+            return BlocProvider(
+              create: (context) => getIt<ProductsBloc>(),
+              child: ProductListScreen(user: user),
+            );
           }
           return _errorBuilder(context, state);
         },

@@ -1,6 +1,13 @@
 import 'package:bloc_demo_project/feature/login/domain/entities/user.dart'
     show User;
+import 'package:bloc_demo_project/feature/products/domain/entities/produsts.dart'
+    show ProductListLocal;
+import 'package:bloc_demo_project/feature/products/presentation/bloc/products_bloc.dart'
+    show ProductsBloc;
+import 'package:bloc_demo_project/feature/products/presentation/bloc/products_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer;
+import 'package:loader_overlay/loader_overlay.dart';
 
 class ProductListScreen extends StatelessWidget {
   final User user;
@@ -19,71 +26,98 @@ class ProductListScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(16),
-        itemCount: products.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 16),
-        itemBuilder: (context, index) {
-          final product = products[index] as Map<String, dynamic>;
-          final images = product['images'] as List<dynamic>?;
-          final category = product['category'] as Map<String, dynamic>?;
-          return Card(
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
-              leading: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child:
-                    images != null && images.isNotEmpty
-                        ? Image.network(
-                          images[0] as String,
-                          width: 64,
-                          height: 64,
-                          fit: BoxFit.cover,
-                        )
-                        : Container(
-                          width: 64,
-                          height: 64,
-                          color: colorScheme.surfaceVariant,
+      body: BlocConsumer<ProductsBloc, ProductsState>(
+        listener: (context, state) {
+          state.when(
+            initial: () {
+              context.loaderOverlay.show();
+            },
+            loading: (isLoading) {
+              if (isLoading) {
+                context.loaderOverlay.show();
+              } else {
+                context.loaderOverlay.hide();
+              }
+            },
+            success: (products, listGetState) {},
+            failure: (error) {},
+          );
+        },
+        builder: (context, state) {
+          return state.when(
+            initial: () => const SizedBox.shrink(),
+            loading: (isLoading) {
+              return const SizedBox.shrink();
+            },
+            failure: (error) => const SizedBox.shrink(),
+            success: (products, listGetState) {
+              return ListView.separated(
+                padding: const EdgeInsets.all(16),
+                itemCount: products.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 16),
+                itemBuilder: (context, index) {
+                  ProductListLocal product = products[index];
+                  return Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child:
+                            product.images.isNotEmpty
+                                ? Image.network(
+                                  product.images.first,
+                                  width: 64,
+                                  height: 64,
+                                  fit: BoxFit.cover,
+                                )
+                                : Container(
+                                  width: 64,
+                                  height: 64,
+                                  color: colorScheme.surfaceVariant,
+                                ),
+                      ),
+                      title: Text(
+                        product.title ?? '',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
-              ),
-              title: Text(
-                product['title']?.toString() ?? '',
-                style: textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 4),
-                  Text(
-                    'Category: ${category?['name'] ?? ''}',
-                    style: textTheme.bodySmall?.copyWith(
-                      color: colorScheme.primary,
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 4),
+                          Text(
+                            'Category: ${product.category}',
+                            style: textTheme.bodySmall?.copyWith(
+                              color: colorScheme.primary,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${product.price}',
+                            style: textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.secondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        color: colorScheme.outline,
+                      ),
+                      onTap: () {
+                        // Navigate to detail (to be implemented)
+                      },
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${product['price']}',
-                    style: textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.secondary,
-                    ),
-                  ),
-                ],
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: colorScheme.outline,
-              ),
-              onTap: () {
-                // Navigate to detail (to be implemented)
-              },
-            ),
+                  );
+                },
+              );
+            },
           );
         },
       ),
