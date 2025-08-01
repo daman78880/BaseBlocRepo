@@ -35,7 +35,7 @@ class ApiHelper {
       );
       Response response;
       String url = endPoint;
-      if (pathParams != null) {
+      if (pathParams != null && pathParams.isNotEmpty) {
         url = '$endPoint/$pathParams';
       }
       switch (method) {

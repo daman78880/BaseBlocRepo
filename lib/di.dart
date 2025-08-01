@@ -113,7 +113,7 @@ void _initProducts() {
   );
 
   // Bloc
-  getIt.registerLazySingleton(
+  getIt.registerFactory(
     () => ProductsBloc(productsUseCase: getIt<ProductsUseCase>()),
   );
 }

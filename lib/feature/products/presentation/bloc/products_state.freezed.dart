@@ -55,12 +55,13 @@ extension ProductsStatePatterns on ProductsState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ProductsInitial value)?  initial,TResult Function( ProductsLoading value)?  loading,TResult Function( ProductsSuccess value)?  success,TResult Function( ProductsFailure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ProductsInitial value)?  initial,TResult Function( ProductsLoading value)?  loading,TResult Function( ProductsLoadingMore value)?  loadingMore,TResult Function( ProductsSuccess value)?  success,TResult Function( ProductsFailure value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial(_that);case ProductsLoading() when loading != null:
-return loading(_that);case ProductsSuccess() when success != null:
+return loading(_that);case ProductsLoadingMore() when loadingMore != null:
+return loadingMore(_that);case ProductsSuccess() when success != null:
 return success(_that);case ProductsFailure() when failure != null:
 return failure(_that);case _:
   return orElse();
@@ -80,12 +81,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ProductsInitial value)  initial,required TResult Function( ProductsLoading value)  loading,required TResult Function( ProductsSuccess value)  success,required TResult Function( ProductsFailure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ProductsInitial value)  initial,required TResult Function( ProductsLoading value)  loading,required TResult Function( ProductsLoadingMore value)  loadingMore,required TResult Function( ProductsSuccess value)  success,required TResult Function( ProductsFailure value)  failure,}){
 final _that = this;
 switch (_that) {
 case ProductsInitial():
 return initial(_that);case ProductsLoading():
-return loading(_that);case ProductsSuccess():
+return loading(_that);case ProductsLoadingMore():
+return loadingMore(_that);case ProductsSuccess():
 return success(_that);case ProductsFailure():
 return failure(_that);}
 }
@@ -101,12 +103,13 @@ return failure(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ProductsInitial value)?  initial,TResult? Function( ProductsLoading value)?  loading,TResult? Function( ProductsSuccess value)?  success,TResult? Function( ProductsFailure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ProductsInitial value)?  initial,TResult? Function( ProductsLoading value)?  loading,TResult? Function( ProductsLoadingMore value)?  loadingMore,TResult? Function( ProductsSuccess value)?  success,TResult? Function( ProductsFailure value)?  failure,}){
 final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial(_that);case ProductsLoading() when loading != null:
-return loading(_that);case ProductsSuccess() when success != null:
+return loading(_that);case ProductsLoadingMore() when loadingMore != null:
+return loadingMore(_that);case ProductsSuccess() when success != null:
 return success(_that);case ProductsFailure() when failure != null:
 return failure(_that);case _:
   return null;
@@ -125,12 +128,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( bool isLoading)?  loading,TResult Function( List<ProductListLocal> products,  ListGetType listGetState)?  success,TResult Function( String error)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( bool isLoading)?  loading,TResult Function( bool isLoadingMore)?  loadingMore,TResult Function( List<ProductListLocal> products,  ListGetType listGetState,  bool maxReached)?  success,TResult Function( String error)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial();case ProductsLoading() when loading != null:
-return loading(_that.isLoading);case ProductsSuccess() when success != null:
-return success(_that.products,_that.listGetState);case ProductsFailure() when failure != null:
+return loading(_that.isLoading);case ProductsLoadingMore() when loadingMore != null:
+return loadingMore(_that.isLoadingMore);case ProductsSuccess() when success != null:
+return success(_that.products,_that.listGetState,_that.maxReached);case ProductsFailure() when failure != null:
 return failure(_that.error);case _:
   return orElse();
 
@@ -149,12 +153,13 @@ return failure(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( bool isLoading)  loading,required TResult Function( List<ProductListLocal> products,  ListGetType listGetState)  success,required TResult Function( String error)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( bool isLoading)  loading,required TResult Function( bool isLoadingMore)  loadingMore,required TResult Function( List<ProductListLocal> products,  ListGetType listGetState,  bool maxReached)  success,required TResult Function( String error)  failure,}) {final _that = this;
 switch (_that) {
 case ProductsInitial():
 return initial();case ProductsLoading():
-return loading(_that.isLoading);case ProductsSuccess():
-return success(_that.products,_that.listGetState);case ProductsFailure():
+return loading(_that.isLoading);case ProductsLoadingMore():
+return loadingMore(_that.isLoadingMore);case ProductsSuccess():
+return success(_that.products,_that.listGetState,_that.maxReached);case ProductsFailure():
 return failure(_that.error);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -169,12 +174,13 @@ return failure(_that.error);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( bool isLoading)?  loading,TResult? Function( List<ProductListLocal> products,  ListGetType listGetState)?  success,TResult? Function( String error)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( bool isLoading)?  loading,TResult? Function( bool isLoadingMore)?  loadingMore,TResult? Function( List<ProductListLocal> products,  ListGetType listGetState,  bool maxReached)?  success,TResult? Function( String error)?  failure,}) {final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial();case ProductsLoading() when loading != null:
-return loading(_that.isLoading);case ProductsSuccess() when success != null:
-return success(_that.products,_that.listGetState);case ProductsFailure() when failure != null:
+return loading(_that.isLoading);case ProductsLoadingMore() when loadingMore != null:
+return loadingMore(_that.isLoadingMore);case ProductsSuccess() when success != null:
+return success(_that.products,_that.listGetState,_that.maxReached);case ProductsFailure() when failure != null:
 return failure(_that.error);case _:
   return null;
 
@@ -284,8 +290,74 @@ as bool,
 /// @nodoc
 
 
+class ProductsLoadingMore implements ProductsState {
+  const ProductsLoadingMore({required this.isLoadingMore});
+  
+
+ final  bool isLoadingMore;
+
+/// Create a copy of ProductsState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProductsLoadingMoreCopyWith<ProductsLoadingMore> get copyWith => _$ProductsLoadingMoreCopyWithImpl<ProductsLoadingMore>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductsLoadingMore&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isLoadingMore);
+
+@override
+String toString() {
+  return 'ProductsState.loadingMore(isLoadingMore: $isLoadingMore)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ProductsLoadingMoreCopyWith<$Res> implements $ProductsStateCopyWith<$Res> {
+  factory $ProductsLoadingMoreCopyWith(ProductsLoadingMore value, $Res Function(ProductsLoadingMore) _then) = _$ProductsLoadingMoreCopyWithImpl;
+@useResult
+$Res call({
+ bool isLoadingMore
+});
+
+
+
+
+}
+/// @nodoc
+class _$ProductsLoadingMoreCopyWithImpl<$Res>
+    implements $ProductsLoadingMoreCopyWith<$Res> {
+  _$ProductsLoadingMoreCopyWithImpl(this._self, this._then);
+
+  final ProductsLoadingMore _self;
+  final $Res Function(ProductsLoadingMore) _then;
+
+/// Create a copy of ProductsState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? isLoadingMore = null,}) {
+  return _then(ProductsLoadingMore(
+isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
 class ProductsSuccess implements ProductsState {
-  const ProductsSuccess({required final  List<ProductListLocal> products, required this.listGetState}): _products = products;
+  const ProductsSuccess({required final  List<ProductListLocal> products, required this.listGetState, required this.maxReached}): _products = products;
   
 
  final  List<ProductListLocal> _products;
@@ -296,6 +368,7 @@ class ProductsSuccess implements ProductsState {
 }
 
  final  ListGetType listGetState;
+ final  bool maxReached;
 
 /// Create a copy of ProductsState
 /// with the given fields replaced by the non-null parameter values.
@@ -307,16 +380,16 @@ $ProductsSuccessCopyWith<ProductsSuccess> get copyWith => _$ProductsSuccessCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductsSuccess&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.listGetState, listGetState) || other.listGetState == listGetState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductsSuccess&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.listGetState, listGetState) || other.listGetState == listGetState)&&(identical(other.maxReached, maxReached) || other.maxReached == maxReached));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_products),listGetState);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_products),listGetState,maxReached);
 
 @override
 String toString() {
-  return 'ProductsState.success(products: $products, listGetState: $listGetState)';
+  return 'ProductsState.success(products: $products, listGetState: $listGetState, maxReached: $maxReached)';
 }
 
 
@@ -327,7 +400,7 @@ abstract mixin class $ProductsSuccessCopyWith<$Res> implements $ProductsStateCop
   factory $ProductsSuccessCopyWith(ProductsSuccess value, $Res Function(ProductsSuccess) _then) = _$ProductsSuccessCopyWithImpl;
 @useResult
 $Res call({
- List<ProductListLocal> products, ListGetType listGetState
+ List<ProductListLocal> products, ListGetType listGetState, bool maxReached
 });
 
 
@@ -344,11 +417,12 @@ class _$ProductsSuccessCopyWithImpl<$Res>
 
 /// Create a copy of ProductsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? products = null,Object? listGetState = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? products = null,Object? listGetState = null,Object? maxReached = null,}) {
   return _then(ProductsSuccess(
 products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
 as List<ProductListLocal>,listGetState: null == listGetState ? _self.listGetState : listGetState // ignore: cast_nullable_to_non_nullable
-as ListGetType,
+as ListGetType,maxReached: null == maxReached ? _self.maxReached : maxReached // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

@@ -48,3 +48,65 @@ void pop(BuildContext context, int returnedLevel) {
     Navigator.pop(context, true);
   }
 }
+
+extension SafeStringConversion on String? {
+  /// Safely convert to nullable trimmed string
+  String? toStringConversion() {
+    final value = this?.trim();
+    if (value == null || value.toLowerCase() == 'null' || value.isEmpty) {
+      return null;
+    }
+    return value;
+  }
+
+  /// Safely convert to int (handles "100", "100.0", "₹1,000", etc.)
+  int toIntConversion() {
+    final value = this?.trim() ?? '';
+    if (value.isEmpty || value.toLowerCase() == 'null') return 0;
+
+    // Remove non-numeric characters except dot and minus
+    final cleaned = value.replaceAll(RegExp(r'[^\d\.\-]'), '');
+    final parsed = double.tryParse(cleaned);
+    return parsed?.toInt() ?? 0;
+  }
+  // int toIntConversion() {
+  //   var string = this ?? "";
+  //   var afterRemovingMinusSign = string.replaceAll("-", "");
+  //   // Check if the string is numeric or contains a decimal point
+  //   if (string.isNotEmpty && string != "null" && (RegExp(r'^-?[0-9]*$').hasMatch(afterRemovingMinusSign) || afterRemovingMinusSign.contains('.'))) {
+  //     double parsedValue = double.tryParse(string) ?? 0;
+  //     return parsedValue.toInt();
+  //   }
+  //   return 0;
+  // }
+
+  /// Safely convert to double
+  double toDoubleConversion() {
+    final value = this?.trim() ?? '';
+    if (value.isEmpty || value.toLowerCase() == 'null') return 0.0;
+
+    final cleaned = value.replaceAll(RegExp(r'[^\d\.\-]'), '');
+    return double.tryParse(cleaned) ?? 0.0;
+  }
+
+  // double toDoubleConversion() {
+  //   var string = this ?? "";
+  //   if (string.isNotEmpty && string != "null" && RegExp(r'^-?d+(.d+)?$|^-?d+.$').hasMatch(string)) {
+  //    return double.parse(string.endsWith('.') ? string + '0' : string);
+  //   }
+  //   return 0.0;
+  // }
+  /// Safely convert to DateTime
+  DateTime? toSafeDateTime() {
+    final value = this?.trim();
+    if (value == null || value.isEmpty || value.toLowerCase() == 'null') {
+      return null;
+    }
+
+    try {
+      return DateTime.tryParse(value);
+    } catch (_) {
+      return null;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import 'package:bloc_demo_project/core/network/api_result.dart' show Failure;
-import 'package:bloc_demo_project/feature/products/domain/entities/produsts.dart'
+import 'package:bloc_demo_project/feature/products/domain/entities/products_list_local.dart'
     show ProductListLocal;
 import 'package:fpdart/fpdart.dart' show Either;
 

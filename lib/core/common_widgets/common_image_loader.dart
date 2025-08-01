@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:bloc_demo_project/core/theme/color_schemes.dart'
+    show AppColorSchemes;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart' show Shimmer;
 import '../constants/image_resource.dart';
 
 /// Enum for supported asset types
@@ -101,12 +104,6 @@ class CommonImageLoader extends StatelessWidget {
           fit: fit ?? BoxFit.cover,
           placeholder: (context, url) => _placeholderWidget(),
           errorWidget: (context, url, error) => _placeholderWidget(),
-          progressIndicatorBuilder: (context, url, progress) {
-            if (onProgress != null) {
-              onProgress!(progress.progress ?? 0);
-            }
-            return _progressWidget(progress.progress ?? 0);
-          },
         );
         break;
     }
@@ -124,6 +121,13 @@ class CommonImageLoader extends StatelessWidget {
   }
 
   Widget _placeholderWidget() {
+    if (placeholder == null) {
+      return Shimmer.fromColors(
+        baseColor: AppColorSchemes.lightColorScheme.primary,
+        highlightColor: Colors.transparent,
+        child: Container(color: AppColorSchemes.lightColorScheme.primary),
+      );
+    }
     return Image.asset(
       placeholder ?? ImageResource.splashBg,
       width: width,
