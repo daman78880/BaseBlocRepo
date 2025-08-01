@@ -25,6 +25,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         selectProduct: (index) async {
           await _selectProduct(emit, index);
         },
+        getProductDetail: (id) async {
+          await _getProductDetail(emit, id);
+        },
       );
     });
     // Trigger event after bloc is fully constructed
@@ -54,7 +57,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       emit(ProductsState.loading(isLoading: true));
     }
 
-    final products = await _productsUseCase.getProducts(
+    final products = await _productsUseCase.getProductsList(
       queryParams: {"limit": 15, "offset": currentList.length},
       pathParams: '',
     );
@@ -114,5 +117,17 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         maxReached: maxReached,
       ),
     );
+  }
+
+  _getProductDetail(Emitter<ProductsState> emit, int id) async {
+    String pathParams = '/$id';
+    final product = await _productsUseCase.getProductDetail(
+      pathParams: pathParams,
+    );
+    final result = product.fold(
+      (failure) => ProductsState.failure(error: failure.message),
+      (product) => ProductsState.productDetail(product: product),
+    );
+    emit(result);
   }
 }

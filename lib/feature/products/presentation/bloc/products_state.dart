@@ -22,4 +22,8 @@ sealed class ProductsState with _$ProductsState {
 
   const factory ProductsState.failure({required String error}) =
       ProductsFailure;
+
+  const factory ProductsState.productDetail({
+    required ProductListLocal product,
+  }) = ProductsProductDetail;
 }

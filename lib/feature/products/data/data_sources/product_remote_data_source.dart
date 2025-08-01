@@ -6,4 +6,6 @@ abstract class ProductsRemoteDataSource {
     required Map<String, dynamic>? queryParams,
     required String? pathParams,
   });
+
+  Future<ProductList> getProductDetail({required String pathParams});
 }

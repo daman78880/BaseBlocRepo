@@ -9,7 +9,7 @@ class ProductsUseCase {
   final ProductsRepository productsRepository;
   ProductsUseCase(this.productsRepository);
 
-  Future<Either<Failure, List<ProductListLocal>>> getProducts({
+  Future<Either<Failure, List<ProductListLocal>>> getProductsList({
     required Map<String, dynamic>? queryParams,
     required String? pathParams,
   }) async {
@@ -17,5 +17,11 @@ class ProductsUseCase {
       queryParams: queryParams,
       pathParams: pathParams,
     );
+  }
+
+  Future<Either<Failure, ProductListLocal>> getProductDetail({
+    required String pathParams,
+  }) async {
+    return await productsRepository.getProductDetail(pathParams: pathParams);
   }
 }

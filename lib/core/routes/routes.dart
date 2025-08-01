@@ -1,9 +1,9 @@
 import 'package:bloc_demo_project/di.dart' show getIt;
-import 'package:bloc_demo_project/feature/login/data/models/login_response_model.dart'
-    show LoginResponseModel;
 import 'package:bloc_demo_project/feature/login/domain/entities/user.dart';
 import 'package:bloc_demo_project/feature/login/presentation/bloc/login_bloc.dart';
 import 'package:bloc_demo_project/feature/login/presentation/screen/login_screenn.dart';
+import 'package:bloc_demo_project/feature/products/domain/entities/products_list_local.dart'
+    show ProductListLocal;
 import 'package:bloc_demo_project/feature/products/presentation/bloc/products_bloc.dart'
     show ProductsBloc;
 import 'package:flutter/material.dart';
@@ -66,7 +66,17 @@ class AppRouter {
       GoRoute(
         path: RoutePaths.productDetail,
         name: RouteNames.productDetail,
-        builder: (context, state) => const ProductDetailScreen(),
+        // builder: (context, state) => const ProductDetailScreen(),
+        builder: (context, state) {
+          if (state.extra != null && state.extra is ProductListLocal) {
+            final user = state.extra as ProductListLocal;
+            return BlocProvider(
+              create: (context) => getIt<ProductsBloc>(),
+              child: ProductDetailScreen(prductDetail: user),
+            );
+          }
+          return _errorBuilder(context, state);
+        },
       ),
       GoRoute(
         path: RoutePaths.productCreate,

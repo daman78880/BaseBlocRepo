@@ -10,4 +10,6 @@ sealed class ProductsEvent with _$ProductsEvent {
       ProductsGetList;
   const factory ProductsEvent.selectProduct({required int index}) =
       ProductToggleSelection;
+  const factory ProductsEvent.getProductDetail({required int id}) =
+      ProductsGetProductDetail;
 }

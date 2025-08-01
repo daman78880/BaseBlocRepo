@@ -36,4 +36,20 @@ class ProductsRemoteDataSourceImp implements ProductsRemoteDataSource {
     }
     throw Exception(ErrorStrings.unknownError);
   }
+
+  @override
+  Future<ProductList> getProductDetail({required String pathParams}) async {
+    var response = await apiHelper.request(
+      method: RequestType.get,
+      endPoint: ApiConfig.products,
+      pathParams: pathParams,
+      decoder: (data) => ProductList.fromJson(data),
+    );
+    if (response is Success<ProductList>) {
+      return response.data;
+    } else if (response is Failure) {
+      throw response;
+    }
+    throw Exception(ErrorStrings.unknownError);
+  }
 }

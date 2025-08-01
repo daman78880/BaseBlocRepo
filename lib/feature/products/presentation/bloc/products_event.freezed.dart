@@ -55,13 +55,14 @@ extension ProductsEventPatterns on ProductsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ProductsInitial value)?  initial,TResult Function( ProductsGetList value)?  getList,TResult Function( ProductToggleSelection value)?  selectProduct,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ProductsInitial value)?  initial,TResult Function( ProductsGetList value)?  getList,TResult Function( ProductToggleSelection value)?  selectProduct,TResult Function( ProductsGetProductDetail value)?  getProductDetail,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial(_that);case ProductsGetList() when getList != null:
 return getList(_that);case ProductToggleSelection() when selectProduct != null:
-return selectProduct(_that);case _:
+return selectProduct(_that);case ProductsGetProductDetail() when getProductDetail != null:
+return getProductDetail(_that);case _:
   return orElse();
 
 }
@@ -79,13 +80,14 @@ return selectProduct(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ProductsInitial value)  initial,required TResult Function( ProductsGetList value)  getList,required TResult Function( ProductToggleSelection value)  selectProduct,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ProductsInitial value)  initial,required TResult Function( ProductsGetList value)  getList,required TResult Function( ProductToggleSelection value)  selectProduct,required TResult Function( ProductsGetProductDetail value)  getProductDetail,}){
 final _that = this;
 switch (_that) {
 case ProductsInitial():
 return initial(_that);case ProductsGetList():
 return getList(_that);case ProductToggleSelection():
-return selectProduct(_that);}
+return selectProduct(_that);case ProductsGetProductDetail():
+return getProductDetail(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -99,13 +101,14 @@ return selectProduct(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ProductsInitial value)?  initial,TResult? Function( ProductsGetList value)?  getList,TResult? Function( ProductToggleSelection value)?  selectProduct,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ProductsInitial value)?  initial,TResult? Function( ProductsGetList value)?  getList,TResult? Function( ProductToggleSelection value)?  selectProduct,TResult? Function( ProductsGetProductDetail value)?  getProductDetail,}){
 final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial(_that);case ProductsGetList() when getList != null:
 return getList(_that);case ProductToggleSelection() when selectProduct != null:
-return selectProduct(_that);case _:
+return selectProduct(_that);case ProductsGetProductDetail() when getProductDetail != null:
+return getProductDetail(_that);case _:
   return null;
 
 }
@@ -122,12 +125,13 @@ return selectProduct(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( ListGetType listGetState)?  getList,TResult Function( int index)?  selectProduct,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( ListGetType listGetState)?  getList,TResult Function( int index)?  selectProduct,TResult Function( int id)?  getProductDetail,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial();case ProductsGetList() when getList != null:
 return getList(_that.listGetState);case ProductToggleSelection() when selectProduct != null:
-return selectProduct(_that.index);case _:
+return selectProduct(_that.index);case ProductsGetProductDetail() when getProductDetail != null:
+return getProductDetail(_that.id);case _:
   return orElse();
 
 }
@@ -145,12 +149,13 @@ return selectProduct(_that.index);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( ListGetType listGetState)  getList,required TResult Function( int index)  selectProduct,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( ListGetType listGetState)  getList,required TResult Function( int index)  selectProduct,required TResult Function( int id)  getProductDetail,}) {final _that = this;
 switch (_that) {
 case ProductsInitial():
 return initial();case ProductsGetList():
 return getList(_that.listGetState);case ProductToggleSelection():
-return selectProduct(_that.index);}
+return selectProduct(_that.index);case ProductsGetProductDetail():
+return getProductDetail(_that.id);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -164,12 +169,13 @@ return selectProduct(_that.index);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( ListGetType listGetState)?  getList,TResult? Function( int index)?  selectProduct,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( ListGetType listGetState)?  getList,TResult? Function( int index)?  selectProduct,TResult? Function( int id)?  getProductDetail,}) {final _that = this;
 switch (_that) {
 case ProductsInitial() when initial != null:
 return initial();case ProductsGetList() when getList != null:
 return getList(_that.listGetState);case ProductToggleSelection() when selectProduct != null:
-return selectProduct(_that.index);case _:
+return selectProduct(_that.index);case ProductsGetProductDetail() when getProductDetail != null:
+return getProductDetail(_that.id);case _:
   return null;
 
 }
@@ -334,6 +340,72 @@ class _$ProductToggleSelectionCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? index = null,}) {
   return _then(ProductToggleSelection(
 index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ProductsGetProductDetail implements ProductsEvent {
+  const ProductsGetProductDetail({required this.id});
+  
+
+ final  int id;
+
+/// Create a copy of ProductsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProductsGetProductDetailCopyWith<ProductsGetProductDetail> get copyWith => _$ProductsGetProductDetailCopyWithImpl<ProductsGetProductDetail>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductsGetProductDetail&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'ProductsEvent.getProductDetail(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ProductsGetProductDetailCopyWith<$Res> implements $ProductsEventCopyWith<$Res> {
+  factory $ProductsGetProductDetailCopyWith(ProductsGetProductDetail value, $Res Function(ProductsGetProductDetail) _then) = _$ProductsGetProductDetailCopyWithImpl;
+@useResult
+$Res call({
+ int id
+});
+
+
+
+
+}
+/// @nodoc
+class _$ProductsGetProductDetailCopyWithImpl<$Res>
+    implements $ProductsGetProductDetailCopyWith<$Res> {
+  _$ProductsGetProductDetailCopyWithImpl(this._self, this._then);
+
+  final ProductsGetProductDetail _self;
+  final $Res Function(ProductsGetProductDetail) _then;
+
+/// Create a copy of ProductsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(ProductsGetProductDetail(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

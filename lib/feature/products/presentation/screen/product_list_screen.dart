@@ -1,5 +1,8 @@
+import 'package:bloc_demo_project/core/common_widgets/button_bouncing_effect.dart'
+    show ButtonBouncingEffect;
 import 'package:bloc_demo_project/core/constants/common_enums.dart'
     show ListGetType;
+import 'package:bloc_demo_project/core/routes/routes.dart' show RouteNames;
 import 'package:bloc_demo_project/feature/login/domain/entities/user.dart'
     show User;
 import 'package:bloc_demo_project/feature/products/domain/entities/products_list_local.dart'
@@ -11,6 +14,7 @@ import 'package:bloc_demo_project/feature/products/presentation/bloc/products_ev
 import 'package:bloc_demo_project/feature/products/presentation/bloc/products_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../core/common_widgets/common_image_loader.dart'
@@ -131,79 +135,87 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     }
 
                     final product = _products[index];
-                    return Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.all(16),
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child:
-                              product.images?.isNotEmpty ?? false
-                                  ? CommonImageLoader(
-                                    asset: CommonImageAsset(
-                                      path: product.images!.first,
-                                      type: CommonImageType.network,
+                    return ButtonBouncingEffect(
+                      onTap: () {
+                        context.pushNamed(
+                          RouteNames.productList,
+                          extra: product,
+                        );
+                      },
+                      child: Card(
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.all(16),
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child:
+                                product.images?.isNotEmpty ?? false
+                                    ? CommonImageLoader(
+                                      asset: CommonImageAsset(
+                                        path: product.images!.first,
+                                        type: CommonImageType.network,
+                                      ),
+                                      width: 64,
+                                      height: 64,
+                                      fit: BoxFit.cover,
+                                    )
+                                    : Container(
+                                      width: 64,
+                                      height: 64,
+                                      color: colorScheme.surfaceVariant,
                                     ),
-                                    width: 64,
-                                    height: 64,
-                                    fit: BoxFit.cover,
-                                  )
-                                  : Container(
-                                    width: 64,
-                                    height: 64,
-                                    color: colorScheme.surfaceVariant,
-                                  ),
-                        ),
-                        title: Text(
-                          product.title ?? '',
-                          style: textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 4),
-                            Text(
-                              'Category: ${product.category?.name}',
-                              style: textTheme.bodySmall?.copyWith(
-                                color: colorScheme.primary,
+                          title: Text(
+                            product.title ?? '',
+                            style: textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 4),
+                              Text(
+                                'Category: ${product.category?.name}',
+                                style: textTheme.bodySmall?.copyWith(
+                                  color: colorScheme.primary,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '${product.price}',
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: colorScheme.secondary,
+                              const SizedBox(height: 4),
+                              Text(
+                                '${product.price}',
+                                style: textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: colorScheme.secondary,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: colorScheme.outline,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                context.read<ProductsBloc>().add(
-                                  ProductsEvent.selectProduct(index: index),
-                                );
-                              },
-                              icon: Icon(
-                                product.isSelected == true
-                                    ? Icons.check_box
-                                    : Icons.check_box_outline_blank,
-                                color: colorScheme.primary,
+                            ],
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: colorScheme.outline,
                               ),
-                            ),
-                          ],
+                              IconButton(
+                                onPressed: () {
+                                  context.read<ProductsBloc>().add(
+                                    ProductsEvent.selectProduct(index: index),
+                                  );
+                                },
+                                icon: Icon(
+                                  product.isSelected == true
+                                      ? Icons.check_box
+                                      : Icons.check_box_outline_blank,
+                                  color: colorScheme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

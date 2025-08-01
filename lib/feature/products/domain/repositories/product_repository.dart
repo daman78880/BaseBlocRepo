@@ -8,4 +8,8 @@ abstract class ProductsRepository {
     required Map<String, dynamic>? queryParams,
     required String? pathParams,
   });
+
+  Future<Either<Failure, ProductListLocal>> getProductDetail({
+    required String pathParams,
+  });
 }
