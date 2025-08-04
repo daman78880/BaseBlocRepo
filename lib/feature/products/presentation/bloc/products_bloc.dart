@@ -120,6 +120,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   }
 
   _getProductDetail(Emitter<ProductsState> emit, int id) async {
+    emit(ProductsState.loading(isLoading: true));
     String pathParams = '/$id';
     final product = await _productsUseCase.getProductDetail(
       pathParams: pathParams,

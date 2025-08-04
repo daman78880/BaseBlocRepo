@@ -116,4 +116,7 @@ void _initProducts() {
   getIt.registerFactory(
     () => ProductsBloc(productsUseCase: getIt<ProductsUseCase>()),
   );
+  //  getIt.registerLazySingleton(
+  //   () => ProductsBloc(productsUseCase: getIt<ProductsUseCase>()),
+  // );
 }

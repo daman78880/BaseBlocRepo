@@ -48,36 +48,65 @@ class AppRouter {
               child: const LoginScreen(),
             ),
       ),
+      ShellRoute(
+        builder: (context, state, child) {
+          return BlocProvider(
+            create: (_) => getIt<ProductsBloc>(),
+            child: child,
+          );
+        },
+        routes: [
+          GoRoute(
+            path: RoutePaths.productList,
+            name: RouteNames.productList,
+            builder: (context, state) {
+              final user = state.extra as User;
+              return ProductListScreen(user: user);
+            },
+          ),
+          GoRoute(
+            path: RoutePaths.productDetail,
+            name: RouteNames.productDetail,
+            builder: (context, state) {
+              final product = state.extra as ProductListLocal;
+              return ProductDetailScreen(productDetail: product);
+            },
+          ),
+        ],
+      ),
       // Product routes
-      GoRoute(
-        path: RoutePaths.productList,
-        name: RouteNames.productList,
-        builder: (context, state) {
-          if (state.extra != null && state.extra is User) {
-            final user = state.extra as User;
-            return BlocProvider(
-              create: (context) => getIt<ProductsBloc>(),
-              child: ProductListScreen(user: user),
-            );
-          }
-          return _errorBuilder(context, state);
-        },
-      ),
-      GoRoute(
-        path: RoutePaths.productDetail,
-        name: RouteNames.productDetail,
-        // builder: (context, state) => const ProductDetailScreen(),
-        builder: (context, state) {
-          if (state.extra != null && state.extra is ProductListLocal) {
-            final user = state.extra as ProductListLocal;
-            return BlocProvider(
-              create: (context) => getIt<ProductsBloc>(),
-              child: ProductDetailScreen(prductDetail: user),
-            );
-          }
-          return _errorBuilder(context, state);
-        },
-      ),
+      // GoRoute(
+      //   path: RoutePaths.productList,
+      //   name: RouteNames.productList,
+      //   builder: (context, state) {
+      //     if (state.extra != null && state.extra is User) {
+      //       final user = state.extra as User;
+      //       return BlocProvider(
+      //         create: (_) => getIt<ProductsBloc>(),
+      //         child: ProductListScreen(user: user),
+      //       );
+      //     }
+      //     return _errorBuilder(context, state);
+      //   },
+      // ),
+      // GoRoute(
+      //   path: RoutePaths.productDetail,
+      //   name: RouteNames.productDetail,
+      //   builder: (context, state) {
+      //     if (state.extra != null && state.extra is ProductListLocal) {
+      //       final extra = state.extra as ProductListLocal;
+      //       return BlocProvider.value(
+      //         value: BlocProvider.of<ProductsBloc>(context),
+      //         child: ProductDetailScreen(productDetail: extra),
+      //       );
+      //       // return BlocProvider.value(
+      //       //   value: getIt<ProductsBloc>(),
+      //       //   child: ProductDetailScreen(productDetail: extra),
+      //       // );
+      //     }
+      //     return _errorBuilder(context, state);
+      //   },
+      // ),
       GoRoute(
         path: RoutePaths.productCreate,
         name: RouteNames.productCreate,

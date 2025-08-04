@@ -138,7 +138,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     return ButtonBouncingEffect(
                       onTap: () {
                         context.pushNamed(
-                          RouteNames.productList,
+                          RouteNames.productDetail,
                           extra: product,
                         );
                       },

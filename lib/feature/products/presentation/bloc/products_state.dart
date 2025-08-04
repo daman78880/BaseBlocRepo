@@ -1,7 +1,6 @@
 import 'package:bloc_demo_project/core/constants/common_enums.dart'
     show ListGetType;
-import 'package:bloc_demo_project/feature/products/domain/entities/products_list_local.dart'
-    show ProductListLocal;
+import 'package:bloc_demo_project/feature/products/domain/entities/products_list_local.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'products_state.freezed.dart';
 

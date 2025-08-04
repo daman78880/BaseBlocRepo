@@ -102,6 +102,9 @@ class CommonImageLoader extends StatelessWidget {
           width: width,
           height: height,
           fit: fit ?? BoxFit.cover,
+          errorListener: (error) {
+            print('==========error: $error');
+          },
           placeholder: (context, url) => _placeholderWidget(),
           errorWidget: (context, url, error) => _placeholderWidget(),
         );

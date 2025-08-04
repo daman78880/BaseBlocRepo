@@ -41,11 +41,10 @@ class ProductsRepositoryImpl implements ProductsRepository {
     required String pathParams,
   }) async {
     try {
-      final product = await productsRemoteDataSource.getProducts(
-        queryParams: {"limit": 1, "offset": 0},
+      final product = await productsRemoteDataSource.getProductDetail(
         pathParams: pathParams,
       );
-      return Right(ProductListLocal.fromJson(product.first.toJson()));
+      return Right(ProductListLocal.fromJson(product.toJson()));
     } catch (e) {
       log('==========e: $e');
       if (e is Failure) {

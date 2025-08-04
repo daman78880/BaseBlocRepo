@@ -1,16 +1,37 @@
+import 'package:bloc_demo_project/core/common_widgets/common_image_loader.dart'
+    show CommonImageAsset, CommonImageLoader, CommonImageType;
 import 'package:bloc_demo_project/feature/products/domain/entities/products_list_local.dart'
     show ProductListLocal;
 import 'package:bloc_demo_project/feature/products/presentation/bloc/products_bloc.dart'
     show ProductsBloc;
+import 'package:bloc_demo_project/feature/products/presentation/bloc/products_event.dart'
+    show ProductsEvent;
 import 'package:bloc_demo_project/feature/products/presentation/bloc/products_state.dart'
-    show ProductsProductDetail, ProductsState;
+    show ProductsLoading, ProductsProductDetail, ProductsState;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
-class ProductDetailScreen extends StatelessWidget {
-  final ProductListLocal prductDetail;
-  const ProductDetailScreen({Key? key, required this.prductDetail})
+class ProductDetailScreen extends StatefulWidget {
+  final ProductListLocal productDetail;
+  const ProductDetailScreen({Key? key, required this.productDetail})
     : super(key: key);
+
+  @override
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.productDetail.id != null) {
+      print('========== widget.productDetail.id: ${widget.productDetail.id}');
+      context.read<ProductsBloc>().add(
+        ProductsEvent.getProductDetail(id: widget.productDetail.id ?? 0),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +42,30 @@ class ProductDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          prductDetail.title ?? '',
+          widget.productDetail.title ?? '',
           style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
       body: BlocConsumer<ProductsBloc, ProductsState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          print('========== state: $state and type ${state.runtimeType}');
+          if (state is ProductsLoading) {
+            context.loaderOverlay.show();
+          } else {
+            context.loaderOverlay.hide();
+          }
+        },
         builder: (context, state) {
           if (state is ProductsProductDetail) {
             final images = state.product.images;
             final category = state.product.category;
             final product = state.product;
-
+            // final images = [
+            //   'https://images.unsplash.com/photo-1583565929583-c5aa76ab16f3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            //   'https://images.unsplash.com/photo-1556800695-a5b593d1586b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            //   'https://images.unsplash.com/photo-1738957300226-a74a4d401d23?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            // ];
             return SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -51,10 +83,11 @@ class ProductDetailScreen extends StatelessWidget {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
-                                child: Image.network(
-                                  images[index].toString(),
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
+                                child: CommonImageLoader(
+                                  asset: CommonImageAsset(
+                                    path: images[index].toString(),
+                                    type: CommonImageType.network,
+                                  ),
                                 ),
                               ),
                             ),
@@ -86,13 +119,15 @@ class ProductDetailScreen extends StatelessWidget {
                   Row(
                     children: [
                       if (category != null && category.image != null)
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            category.image.toString(),
-                            width: 40,
-                            height: 40,
-                            fit: BoxFit.cover,
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: CommonImageLoader(
+                              asset: CommonImageAsset(
+                                path: category.image.toString(),
+                                type: CommonImageType.network,
+                              ),
+                            ),
                           ),
                         ),
                       const SizedBox(width: 12),
@@ -135,7 +170,7 @@ class ProductDetailScreen extends StatelessWidget {
             );
           }
 
-          return const Center(child: CircularProgressIndicator());
+          return const SizedBox.shrink();
         },
       ),
     );

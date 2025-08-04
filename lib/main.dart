@@ -1,6 +1,7 @@
 import 'package:bloc_demo_project/core/constants/device_constatns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart' show SpinKitCubeGrid;
@@ -10,11 +11,16 @@ import 'core/language_them_bloc/bloc/language_them_bloc.dart'
     show LanguageTypes, MapLocaleList;
 import 'core/routes/routes.dart';
 import 'core/theme/app_theme.dart';
+import 'core/common_bloc/app_bloc_observer.dart';
 import 'core/utils/device_utils.dart';
 import 'di.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize BLoC observer for global monitoring
+  Bloc.observer = AppBlocObserver();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
